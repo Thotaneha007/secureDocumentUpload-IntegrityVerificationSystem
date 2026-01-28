@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Upload Document</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    {% if message %}
+        <div class="message success">
+            {{ message }}
+        </div>
+    {% endif %}
+
+    <a href="/verify">Verify Uploaded Document</a>
+    <a href="/login">Logout</a>
+</div>
+
+</body>
+</html>
