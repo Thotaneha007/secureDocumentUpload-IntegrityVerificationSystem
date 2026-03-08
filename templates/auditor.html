@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Auditor Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .header-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .valid { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .invalid { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+    </style>
+</head>
+<body>
+
+<div class="container" style="width: 95%; max-width: 1000px; margin-top: 50px; padding: 40px;">
+    <div class="header-actions">
+        <h2>Auditor Dashboard - System Integrity</h2>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <p>As an Auditor, you can verify the cryptographic integrity of any document across the system.</p>
+
+    {% if message %}
+        <div class="result-box {% if result == 'VALID' %}valid{% else %}invalid{% endif %}">
+            {{ message }}
+        </div>
+    {% endif %}
+
+    {% if documents %}
+    <div style="overflow-x: auto; background: white; border-radius: 8px; border: 1px solid #eee;">
+    <table>
+        <thead>
+            <tr>
+                <th>Document ID</th>
+                <th>File Name</th>
+                <th>Uploaded By</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for doc in documents %}
+            <tr>
+                <td>{{ doc[0] }}</td>
+                <td>{{ doc[1] }}</td>
+                <td>{{ doc[2] }}</td>
+                <td>
+                    <form method="post" style="margin: 0;">
+                        <input type="hidden" name="doc_id" value="{{ doc[0] }}">
+                        <button type="submit" style="padding: 5px 10px; font-size: 0.9em; width: auto;">Verify Integrity</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    {% else %}
+    <p>No documents found in the system for auditing.</p>
+    {% endif %}
+
+</div>
+
+</body>
+</html>

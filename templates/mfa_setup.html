@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MFA Setup</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .qr-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .secret {
+            font-size: 1.2em;
+            letter-spacing: 2px;
+            font-family: monospace;
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" style="max-width: 600px; text-align: left;">
+    <h2 style="text-align: center;">Secure Your Account (Step 2 of 2)</h2>
+    
+    <div style="background-color: #eef2f5; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+        <h3>📱 How to get your 6-digit login code:</h3>
+        <ol style="line-height: 1.6;">
+            <li>Download <strong>Google Authenticator</strong> or <strong>Microsoft Authenticator</strong> from your phone's App Store.</li>
+            <li>Open the app and click the <strong>"+"</strong> button to add a new account.</li>
+            <li>Select <strong>"Scan a QR code"</strong> and point your camera at the image below.</li>
+        </ol>
+    </div>
+    
+    <div class="qr-container">
+        <img src="{{ qr_url }}" alt="MFA QR Code" style="border: 2px solid #ccc; padding: 10px; border-radius: 10px; background: white;">
+        
+        <p style="margin-top: 20px; font-size: 0.9em; color: #555;">If you can't scan the QR code, manually enter this secret setup key into the app:</p>
+        <span class="secret">{{ secret }}</span>
+    </div>
+
+    <div style="margin-top: 30px; text-align: center;">
+        <p>Once you scan this, your phone will start generating a 6-digit code every 30 seconds.</p>
+        <a href="/login" style="text-decoration: none;">
+            <button type="button" style="width: 100%; padding: 15px; font-size: 1.1em; cursor: pointer;">
+                I have scanned it. Continue to Login &rarr;
+            </button>
+        </a>
+    </div>
+</div>
+
+</body>
+</html>
