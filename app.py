@@ -296,10 +296,13 @@ def verify():
 
     conn = get_db()
     cursor = conn.cursor()
-    cursor.execute(
-        "SELECT id, filename FROM documents WHERE user_id = ?",
-        (session["user_id"],)
-    )
+    if session.get("role") == "admin":
+        cursor.execute("SELECT id, filename FROM documents")
+    else:
+        cursor.execute(
+            "SELECT id, filename FROM documents WHERE user_id = ?",
+            (session["user_id"],)
+        )
     documents = cursor.fetchall()
     conn.close()
 

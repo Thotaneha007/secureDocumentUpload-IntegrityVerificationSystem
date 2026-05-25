@@ -2,26 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Secure Document System</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
 <div class="container">
-    <h2>Create Account</h2>
+    <h2>Join Us</h2>
+    <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">Create your account to start securing files</p>
 
     <form method="post">
-        <input type="text" name="username" placeholder="Username" autocomplete="off" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <select name="role" required style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px;">
-            <option value="user">User (Upload & Verify own files)</option>
-            <option value="auditor">Auditor (Verify all files in system)</option>
-            <option value="admin">Admin (Manage & Delete all files)</option>
-        </select>
-        <button type="submit">Register</button>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Choose a username" autocomplete="username" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="••••••••" required>
+        </div>
+
+        <div class="form-group">
+            <label for="role">Account Type</label>
+            <select id="role" name="role" required>
+                <option value="user">User - Manage your own files</option>
+                <option value="auditor">Auditor - Verify system-wide integrity</option>
+                <option value="admin">Admin - Full system management</option>
+            </select>
+        </div>
+        
+        <button type="submit">Create Account</button>
     </form>
 
-    <a href="/login">Already have an account? Login</a>
+    <div class="nav-actions">
+        <a href="/login" class="btn btn-secondary">Back to Login</a>
+    </div>
 </div>
 
 </body>

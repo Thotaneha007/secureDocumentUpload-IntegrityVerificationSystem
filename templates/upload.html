@@ -2,17 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Upload Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Document - Secure Document System</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .file-upload-wrapper {
+            border: 2px dashed var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .file-upload-wrapper:hover {
+            border-color: var(--primary);
+            background: #f1f5f9;
+        }
+    </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Upload Document</h2>
+    <h2>Secure Upload</h2>
+    <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">Your files are encrypted and signed automatically</p>
 
     <form method="post" enctype="multipart/form-data">
-        <input type="file" name="file" required>
-        <button type="submit">Upload</button>
+        <div class="form-group">
+            <label for="file">Select Document</label>
+            <input type="file" id="file" name="file" required style="padding: 10px;">
+        </div>
+        <button type="submit">Upload & Secure</button>
     </form>
 
     {% if message %}
@@ -21,8 +40,16 @@
         </div>
     {% endif %}
 
-    <a href="/verify">Verify Uploaded Document</a>
-    <a href="/login">Logout</a>
+    <div class="nav-actions">
+        <a href="/logout" class="btn btn-secondary">Logout</a>
+        <a href="/verify" class="btn">Verify Files →</a>
+    </div>
+
+    {% if session.get('role') == 'admin' %}
+    <div style="margin-top: 20px;">
+        <a href="/admin" class="btn btn-secondary" style="width: 100%;">Admin Dashboard</a>
+    </div>
+    {% endif %}
 </div>
 
 </body>

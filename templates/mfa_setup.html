@@ -2,53 +2,61 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>MFA Setup</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MFA Setup - Secure Document System</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
-        .qr-container {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .secret {
-            font-size: 1.2em;
-            letter-spacing: 2px;
-            font-family: monospace;
-            background: #f4f4f4;
-            padding: 10px;
-            border-radius: 5px;
+        .qr-card {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             display: inline-block;
+            margin: 20px 0;
+            border: 1px solid var(--border);
+        }
+        .secret-key {
+            font-family: 'JetBrains Mono', monospace;
+            background: #f1f5f9;
+            padding: 12px 20px;
+            border-radius: 12px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
             margin-top: 10px;
+        }
+        ol li {
+            margin-bottom: 12px;
         }
     </style>
 </head>
 <body>
 
-<div class="container" style="max-width: 600px; text-align: left;">
-    <h2 style="text-align: center;">Secure Your Account (Step 2 of 2)</h2>
+<div class="container" style="max-width: 600px;">
+    <h2>Secure Your Account</h2>
+    <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">Step 2: Double your security with MFA</p>
     
-    <div style="background-color: #eef2f5; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-        <h3>📱 How to get your 6-digit login code:</h3>
-        <ol style="line-height: 1.6;">
-            <li>Download <strong>Google Authenticator</strong> or <strong>Microsoft Authenticator</strong> from your phone's App Store.</li>
-            <li>Open the app and click the <strong>"+"</strong> button to add a new account.</li>
-            <li>Select <strong>"Scan a QR code"</strong> and point your camera at the image below.</li>
+    <div style="background: #f8fafc; padding: 25px; border-radius: 20px; border: 1px solid var(--border); margin-bottom: 30px;">
+        <h3 style="margin-top: 0; font-size: 1.1em;">📱 Setup Instructions</h3>
+        <ol style="padding-left: 20px; color: var(--text);">
+            <li>Download <strong>Google Authenticator</strong> or <strong>Microsoft Authenticator</strong> on your mobile device.</li>
+            <li>Open the app and choose "Scan a QR code".</li>
+            <li>Scan the code below or enter the secret key manually.</li>
         </ol>
     </div>
     
-    <div class="qr-container">
-        <img src="{{ qr_url }}" alt="MFA QR Code" style="border: 2px solid #ccc; padding: 10px; border-radius: 10px; background: white;">
+    <div style="text-align: center;">
+        <div class="qr-card">
+            <img src="{{ qr_url }}" alt="MFA QR Code" style="display: block;">
+        </div>
         
-        <p style="margin-top: 20px; font-size: 0.9em; color: #555;">If you can't scan the QR code, manually enter this secret setup key into the app:</p>
-        <span class="secret">{{ secret }}</span>
+        <p style="font-size: 0.9em; color: var(--text-muted); margin-top: 10px;">If you can't scan, use this secret key:</p>
+        <code class="secret-key">{{ secret }}</code>
     </div>
 
-    <div style="margin-top: 30px; text-align: center;">
-        <p>Once you scan this, your phone will start generating a 6-digit code every 30 seconds.</p>
-        <a href="/login" style="text-decoration: none;">
-            <button type="button" style="width: 100%; padding: 15px; font-size: 1.1em; cursor: pointer;">
-                I have scanned it. Continue to Login &rarr;
-            </button>
-        </a>
+    <div style="margin-top: 40px;">
+        <a href="/login" class="btn">I've Scanned It. Continue to Login →</a>
     </div>
 </div>
 

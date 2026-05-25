@@ -2,28 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Secure Document System</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
 <div class="container">
-    <h2>Login</h2>
+    <h2>Welcome Back</h2>
+    <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">Login to access your secure documents</p>
 
     <form method="post">
-        <input type="text" name="username" placeholder="Username" autocomplete="off" required>
-        <input type="password" name="password" placeholder="Password" required>
-        
-        <div style="margin-top: 15px; margin-bottom: 5px; text-align: left;">
-            <label style="font-weight: bold; color: #333;">Authenticator Code:</label>
-            <p style="font-size: 0.85em; color: #666; margin: 5px 0 10px 0;">Look at the Authenticator app on your phone (Google Auth, Microsoft Auth, etc.) to get this 6-digit code.</p>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username" autocomplete="username" required>
         </div>
-        <input type="text" name="mfa_token" placeholder="Enter 6-digit Authenticator Code" autocomplete="off" style="letter-spacing: 2px; font-weight: bold; text-align: center;">
         
-        <button type="submit" style="margin-top: 15px;">Login securely</button>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="••••••••" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="mfa_token">Authenticator Code</label>
+            <p style="font-size: 0.85em; color: var(--text-muted); margin-bottom: 10px;">Enter the 6-digit code from your authenticator app.</p>
+            <input type="text" id="mfa_token" name="mfa_token" placeholder="000000" maxlength="6" autocomplete="one-time-code" style="letter-spacing: 4px; font-weight: 700; text-align: center; font-size: 20px;">
+        </div>
+        
+        <button type="submit">Sign In Securely</button>
     </form>
 
-    <a href="/register">Don’t have an account? Register</a>
+    <div class="nav-actions">
+        <a href="/register" class="btn btn-secondary">Create Account</a>
+    </div>
 </div>
 
 </body>
